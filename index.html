@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Link to jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <!-- Link to Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- Link to Bootwatch theme-->
+    <link href="https://bootswatch.com/3/slate/bootstrap.css" rel="stylesheet" type="text/css">
+    <!-- Link to google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+    <!-- Link to CSS File -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- App icon on tab-->
+    <link rel="icon" href="assets/images/favicon.ico">
+    <!-- Link to Jscript -->
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+    <title>Giftastic</title>
+</head>
+
+
+<body class="center-block">
+
+    <header class="row center-block">
+        <div class="col-xs-12 button-holder center-block">
+            <div class="dynamic-button-holder"></div>
+            <div class="static-button-holder">
+                <button type="submit" class="btn btn-danger" id="trending-button">
+                    <span>Trending GIFs</span>
+                </button>
+                <button type="submit" class="btn btn-danger" id="random-button">
+                    <span>Random GIFs</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content-->
+    <main class="row center-block">
+        <!-- should add new buttons -->
+        <div class="col-lg-3 col-xs-12 form-sidebar pull-right">
+            <form>
+                <div class="form-group">
+                    <p>
+                        <label for="topicAddition">Add Topic</label>
+                    </p>
+                    <input class="form-control" id="topicAddition" placeholder="Type here" type="text">
+                    <button type="submit" class="btn btn-success" id="submit-button">
+                        <span>Submit</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+       
+        <div class="col-lg-9 col-xs-12 gif-container clearfix pull-left"></div>
+    </main>
+
+
+    
+    
+</body>
+</html>
