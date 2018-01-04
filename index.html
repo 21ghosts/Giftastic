@@ -16,50 +16,39 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- App icon on tab-->
     <link rel="icon" href="assets/images/favicon.ico">
-    <!-- Link to Jscript -->
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+  
 
     <title>Giftastic</title>
 </head>
 
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Dragon Ball Super</h1>
+        </div>
 
-<body class="center-block">
+        <div class="row">
+            <div class="col-md-12" id="display-buttons"></div>
+        </div>
 
-    <header class="row center-block">
-        <div class="col-xs-12 button-holder center-block">
-            <div class="dynamic-button-holder"></div>
-            <div class="static-button-holder">
-                <button type="submit" class="btn btn-danger" id="trending-button">
-                    <span>Trending GIFs</span>
-                </button>
-                <button type="submit" class="btn btn-danger" id="random-button">
-                    <span>Random GIFs</span>
-                </button>
+        <div class="row">
+            <div class="col-md-12">
+                <form id="form">
+                    <label for="user-input">Enter Dragon Ball related term</label>
+                    <br>
+                    <input type="text" id="user-input">
+                    <input id="submitPress" type="submit" value="Submit" class="btn btn-default">
+                </form>
             </div>
         </div>
-    </header>
 
-    <main class="row center-block">
-        <!-- should add new buttons -->
-        <div class="col-lg-3 col-xs-12 form-sidebar pull-right">
-            <form>
-                <div class="form-group">
-                    <p>
-                        <label for="topicAddition">Add Topic</label>
-                    </p>
-                    <input class="form-control" id="topicAddition" placeholder="Type here" type="text">
-                    <button type="submit" class="btn btn-success" id="submit-button">
-                        <span>Submit</span>
-                    </button>
-                </div>
-            </form>
+        <div class="row">
+            <div class="col-md-12" id="display-images"></div>
         </div>
-       
-        <div class="col-lg-9 col-xs-12 gif-container clearfix pull-left"></div>
-    </main>
 
-
-    
-    
+    </div>
+    <!-- Link to JS -->
+    <script src="assets/javascript/app.js"></script>
 </body>
+
 </html>

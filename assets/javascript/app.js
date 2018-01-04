@@ -1,34 +1,88 @@
 $(document).ready(function()
 {
     // Need starter initial topics
-    var topics = ['Goku', 'Vegeta', 'Gohan', 'Piccolo', 'Krillin', 'Android 18', 'Yamcha', 'Master Roshi', 'Tien', 'Chiaotzu', 'Trunks', 'Bulma', 'Chi-Chi', 'Vegito', 'Gogeta', 'Beerus', 'Whis']
+    var displayedButtons = ['Goku', 'Vegeta', 'Gohan', 'Piccolo', 'Krillin', 'Android 18', 'Yamcha', 'Master Roshi', 'Tien', 'Chiaotzu', 'Trunks', 'Bulma', 'Chi-Chi', 'Vegito', 'Gogeta', 'Beerus', 'Whis']
 
-    // Need to create additional buttons(function)
-    var buttonFunctions =
-    {
-        //-Make button-holder div a property
-        buttonHolder: $('.dynamic-button-holder'),
+    function displayImg() {
 
-        // Create button for each item
-        listToButtons: function(list)
-        {
-            buttonFuntions.buttonHolder.empty();
+        $("#display-images").empty();
+        var input = $(this).attr("data-name");
+        var limit = 10;
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + input + "&limit=" + limit + "&api_key=CbbsagthcBtNxTU5V5qKcyY6EkyJyYix";
 
-            list.map(buttonFunctions.stringToButton);
-        },
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).done(function (response) {
 
-        // Need to take one string and creat button for it
-        stringToButton: function(str)
-        {
-            var span = $('<span>');
-            var button = $('<button>');
+            for (var j = 0; j < limit; j++) {
 
-            span.text(str);
-            button.addClass('btn btn-info gif-button');
-            button.attr('data-topic', str);
-            button.append(span);
-            buttonFunctions.buttonHolder.append(button);
-            console.log(span);
+                var displayDiv = $("<div>");
+                displayDiv.addClass("holder");
+
+                var image = $("<img>");
+                image.attr("src", response.data[j].images.original_still.url);
+                image.attr("data-still", response.data[j].images.original_still.url);
+                image.attr("data-animate", response.data[j].images.original.url);
+                image.attr("data-state", "still");
+                image.attr("class", "gif");
+                displayDiv.append(image);
+
+                var rating = response.data[j].rating;
+                console.log(response);
+                var pRating = $("<p>").text("Rating: " + rating);
+                displayDiv.append(pRating)
+
+                $("#display-images").append(displayDiv);
+            }
+        });
+    }
+
+    function renderButtons() {
+
+        $("#display-buttons").empty();
+
+        for (var i = 0; i < displayedButtons.length; i++) {
+
+            var newButton = $("<button>")
+            newButton.attr("class", "btn btn-default");
+            newButton.attr("id", "input")
+            newButton.attr("data-name", displayedButtons[i]);
+            newButton.text(displayedButtons[i]);
+            $("#display-buttons").append(newButton);
         }
     }
-})
+
+    function imageChangeState() {
+
+        var state = $(this).attr("data-state");
+        var animateImage = $(this).attr("data-animate");
+        var stillImage = $(this).attr("data-still");
+
+        if (state == "still") {
+            $(this).attr("src", animateImage);
+            $(this).attr("data-state", "animate");
+        }
+
+        else if (state == "animate") {
+            $(this).attr("src", stillImage);
+            $(this).attr("data-state", "still");
+        }
+    }
+
+    $("#submitPress").on("click", function () {
+
+        var input = $("#user-input").val().trim();
+        form.reset();
+        displayedButtons.push(input);
+
+        renderButtons();
+
+        return false;
+    })
+
+    renderButtons();
+
+    $(document).on("click", "#input", displayImg);
+    $(document).on("click", ".gif", imageChangeState);
+});

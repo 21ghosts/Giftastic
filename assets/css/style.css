@@ -1,64 +1,33 @@
-/* Overall CSS */
-
-body {
-   font-family: 'Cormorant Garamond', serif;
-    max-width: 94vw;
-    min-height: 96vh;
-    padding: 2vh 2vw;
+button, div, form, input {
+	margin: 7px;
 }
 
-p, span {
-    font-size: 24px;
-    letter-spacing: .5px;
-    margin: 0;
+img {
+	max-width: 250px;
+	max-height: 250px;
 }
 
 label {
-    font-weight: normal;
+    color: #fff;
 }
 
-/* Form */
-
-.btn-success {
-    margin: 5px 0;
+.btn-default {
+    color: #fff;
+    font-size: medium;
 }
 
-input[type="text"] {
-    font-size: 24px;
+body {
+    font-family: 'Cormorant', Garamond;
+    background-color: no-repeat;
+    background-size: cover;
 }
 
-/* Button */
-
-header {
-    min-height: 50px;
+.holder {
+    float: left;
 }
 
-.btn-danger,
-.btn-info {
-    margin: 5px;
-    min-width: 120px;
-}
-
-.button-holder,
-.gif-container {
-    align-items: flex-start;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    max-width: 94vw;
-}
-
-/* Gif */
-
-.gif-div {
-    margin: 2% auto;
-    max-width: 92vw;
-    min-width: 300px;
-}
-
-.gif {
-    height: auto;
-    max-width: 100%;
+.jumbotron {
+    text-align: center;
 }
 
 
