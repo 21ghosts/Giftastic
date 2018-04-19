@@ -1,59 +1,74 @@
-$(document).ready(function()
+$(document).ready(() =>
 {
-    // Need starter initial topics
-    var displayedButtons = ['Goku', 'Vegeta', 'Gohan', 'Piccolo', 'Krillin', 'Android 18', 'Yamcha', 'Master Roshi', 'Tien', 'Chiaotzu', 'Trunks', 'Bulma', 'Chi-Chi', 'Vegito', 'Gogeta', 'Beerus', 'Whis']
+    // Buttons rendered on page load
+    const renderedBtns = ['Goku', 'Vegeta', 'Gohan', 'Piccolo', 'Krillin', 'Android 18', 'Yamcha', 'Master Roshi', 'Tien', 'Chiaotzu', 'Trunks', 'Bulma', 'Chi-Chi', 'Vegito', 'Gogeta', 'Beerus', 'Whis']
 
-    function displayImg() {
+    function displaysTheImage () {
 
-        $("#display-images").empty();
-        var input = $(this).attr("data-name");
-        var limit = 10;
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + input + "&limit=" + limit + "&api_key=CbbsagthcBtNxTU5V5qKcyY6EkyJyYix";
+        $("#imgArea").empty();
+        const input = $(this).attr("data-name");
+        const limit = 10;
+        const queryURL = `https://api.giphy.com/v1/gifs/search?q=${input}&limit=${limit}&api_key=CbbsagthcBtNxTU5V5qKcyY6EkyJyYix`;
 
         $.ajax({
             url: queryURL,
             method: "GET"
-        }).done(function (response) {
+        }).done((res) => {
 
-            for (var j = 0; j < limit; j++) {
+            for (let j = 0; j < limit; j++) {
 
-                var displayDiv = $("<div>");
-                displayDiv.addClass("holder");
+                var displayToDiv = $("<div>");
+                displayToDiv.addClass("holder");
 
-                var image = $("<img>");
-                image.attr("src", response.data[j].images.original_still.url);
-                image.attr("data-still", response.data[j].images.original_still.url);
-                image.attr("data-animate", response.data[j].images.original.url);
+                let image = $("<img>");
+                image.attr("src", res.data[j].images.original_still.url);
+                image.attr("data-still", res.data[j].images.original_still.url);
+                image.attr("data-animate", res.data[j].images.original.url);
                 image.attr("data-state", "still");
                 image.attr("class", "gif");
-                displayDiv.append(image);
+                displayToDiv.append(image);
 
-                var rating = response.data[j].rating;
-                console.log(response);
-                var pRating = $("<p>").text("Rating: " + rating);
-                displayDiv.append(pRating)
+                const rating = res.data[j].rating;
+                
+                const pRating = $("<p>").text(`Rating: ${rating}`);
+                displayToDiv.append(pRating)
 
-                $("#display-images").append(displayDiv);
+                $("#imgArea").append(displayToDiv);
             }
         });
     }
 
-    function renderButtons() {
+   
 
-        $("#display-buttons").empty();
+    var renderButtons = () => 
+    {
 
-        for (var i = 0; i < displayedButtons.length; i++) {
+        $("#display-Btns").empty();
 
-            var newButton = $("<button>")
-            newButton.attr("class", "btn btn-default");
-            newButton.attr("id", "input")
-            newButton.attr("data-name", displayedButtons[i]);
-            newButton.text(displayedButtons[i]);
-            $("#display-buttons").append(newButton);
+        for (let i = 0; i < renderedBtns.length; i++) {
+
+            let newBtn = $("<button>")
+            newBtn.attr("class", "btn btn-default");
+            newBtn.attr("id", "input")
+            newBtn.attr("data-name", renderedBtns[i]);
+            newBtn.text(renderedBtns[i]);
+            $("#display-Btns").append(newBtn);
         }
     }
 
-    function imageChangeState() {
+    $("#submitBtn").on("click", () => {
+
+        var input = $("#user-input").val().trim();
+        form.reset();
+        renderedBtns.push(input);
+
+        renderButtons();
+
+        return false;
+    })
+
+    function imageChangeState ()
+    {
 
         var state = $(this).attr("data-state");
         var animateImage = $(this).attr("data-animate");
@@ -69,20 +84,9 @@ $(document).ready(function()
             $(this).attr("data-state", "still");
         }
     }
-
-    $("#submitPress").on("click", function () {
-
-        var input = $("#user-input").val().trim();
-        form.reset();
-        displayedButtons.push(input);
-
-        renderButtons();
-
-        return false;
-    })
-
+    
     renderButtons();
 
-    $(document).on("click", "#input", displayImg);
+    $(document).on("click", "#input", displaysTheImage);
     $(document).on("click", ".gif", imageChangeState);
 });
